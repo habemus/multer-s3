@@ -29,8 +29,6 @@ function autoContentType (req, file, cb) {
 
 function S3Storage (opts) {
   if (!opts.bucket) throw new Error('bucket is required')
-  if (!opts.secretAccessKey) throw new Error('secretAccessKey is required')
-  if (!opts.accessKeyId) throw new Error('accessKeyId is required')
   if (!opts.region) throw new Error('region is required')
   if (!opts.dirname) throw new Error('dirname is required')
 
