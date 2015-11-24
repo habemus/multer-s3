@@ -30,12 +30,10 @@ function autoContentType (req, file, cb) {
 function S3Storage (opts) {
   if (!opts.bucket) throw new Error('bucket is required')
   if (!opts.region) throw new Error('region is required')
-  if (!opts.dirname) throw new Error('dirname is required')
 
   var s3cfg = extend(opts, { apiVersion: '2006-03-01' })
 
   delete s3cfg.bucket
-  delete s3cfg.dirname
 
   this.options = opts
   this.getFilename = (opts.filename || getFilename)
@@ -48,7 +46,7 @@ S3Storage.prototype._handleFile = function (req, file, cb) {
   that.getFilename(req, file, function (err, filename) {
     that.getContentType(req, file, function (err, contentType, _stream) {
       var currentSize = 0
-      var filePath = that.options.dirname + '/' + filename
+      var filePath = filename
 
       var upload = that.s3.upload({
         Bucket: that.options.bucket,
